@@ -6,18 +6,19 @@
 trigger:
 - main
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-      displayName: 'Run a multi-line script'
-
-       az vm start 
-    --name luisVm
-    --resource-group LB
-     az vm stop 
-    --name luisVm
-    --resource-group LB
-    
+ - task: AzureCLI@2
+   inputs:
+    azureSubscription: 'LB22VM'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+  
+      # Start the VM
+      az vm start 
+          --name luisVm
+          --resource-group LB
+      
+      # Stop the VM
+      az vm stop 
+          --name luisVm
+          --resource-group LB

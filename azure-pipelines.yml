@@ -1,10 +1,18 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
-trigger:
-- main
+      azureSubscription: 'LB22VM'
+      scriptType: 'ps'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+
+        # Start the VM
+        az vm start 
+            --name luisVm
+            --resource-group LB
+        
+        # Stop the VM
+        az vm stop 
+            --name luisVm
+            --resource-group LB
 
 pool:
   vmImage: ubuntu-latest
@@ -17,3 +25,4 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+

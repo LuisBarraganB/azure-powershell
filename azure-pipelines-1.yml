@@ -17,14 +17,19 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-  resourceGroupName= LB
-   vmName= luisVm
-    az login 
-
-    az vm start 
-    --name luisVm
-    --resource-group LB
-
-    az vm stop 
-    --name luisVm
-    --resource-group LB
+ 
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'LB22VM'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az login 
+      
+          az vm start 
+          --name luisVm
+          --resource-group LB
+      
+          az vm stop 
+          --name luisVm
+          --resource-group LB
